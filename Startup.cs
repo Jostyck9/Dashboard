@@ -38,7 +38,7 @@ namespace Dashboard
 
             services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
 
-            //google auth
+            //auth
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
@@ -57,7 +57,7 @@ namespace Dashboard
                 {
                     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                     facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                }); ;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
