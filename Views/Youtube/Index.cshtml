@@ -1,0 +1,17 @@
+﻿@model List<Dashboard.Models.youtube.Video>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="card-columns text-center">
+        @foreach (var video in Model)
+        {
+        <div class="card embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=@video.VideoUrl allowfullscreen=""></iframe>
+            <div class="card-body">
+                @video.Title
+            </div>
+        </div>
+        }
+    </div>
