@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Dashboard.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dashboard.Controllers
 {
@@ -18,6 +19,7 @@ namespace Dashboard.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             Dal test = new Dal();
@@ -36,7 +38,7 @@ namespace Dashboard.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Data()
         {
             Dal test = new Dal();
