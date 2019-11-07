@@ -35,5 +35,14 @@ namespace Dashboard.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public ActionResult Data()
+        {
+            Dal test = new Dal();
+            DataTest toAdd = test.getData();
+
+            return View("_Data", toAdd);
+        }
     }
 }

@@ -2,15 +2,14 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-    <div class="card-columns">
-        @foreach (var url in Model.my_list)
-        {
-            <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src=@url alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">@url</p>
-            </div>
-            </div>
-        }
+    <div class="card-columns" id="refreshme">
+        @Html.Partial("_Data", Model)
     </div>
+    <script type="text/javascript">
+        function refresh() {
+            $.get('/home/data', function(result) {
+                $('#refreshme').html(result);
+            });
+        }
+        setInterval(refresh, 3000)
+    </script>
