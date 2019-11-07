@@ -20,7 +20,9 @@ namespace Dashboard.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Dal test = new Dal();
+            DataTest toAdd = test.getData();
+            return View(toAdd);
         }
 
         public IActionResult Privacy()

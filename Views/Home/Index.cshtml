@@ -1,83 +1,16 @@
-﻿@{
+﻿@model DataTest
+@{
     ViewData["Title"] = "Home Page";
 }
-
     <div class="card-columns">
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
+        @foreach (var url in Model.my_list)
+        {
+            <div class="card text-center" style="width: 18rem;">
+            <img class="card-img-top" src=@url alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
+                <p class="card-text">@url</p>
             </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
             </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
-        <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top" src="https://i.imgur.com/p5tuCE6.png" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Gabinou</h5>
-                <p class="card-text">The triggering is part of himself</p>
-            </div>
-        </div>
+        }
     </div>
