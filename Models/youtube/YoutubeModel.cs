@@ -116,5 +116,84 @@ namespace Dashboard.Models.youtube
             }
             return toReturn;
         }
+
+        public List<ChannelYoutube> SearchChannels(string query, int maxRes = 20)
+        {
+            var toReturn = new List<ChannelYoutube>();
+            YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
+            var searchListRequest = yt.Search.List("snippet");
+
+            if (query == string.Empty)
+            {
+                return toReturn;
+            }
+            searchListRequest.Q = query; // Replace with your search term.
+            searchListRequest.MaxResults = maxRes;
+            try
+            {
+                var searchListResponse = searchListRequest.Execute();
+                foreach (var searchResultChannel in searchListResponse.Items)
+                {
+                    if (searchResultChannel.Id.Kind == "youtube#channel")
+                    {
+                        toReturn.Add(GetChannelById(searchResultChannel.Id.ChannelId));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return toReturn;
+        }
+
+        public ChannelYoutube GetChannelById(string id)
+        {
+            ChannelYoutube toReturn = new ChannelYoutube {Id = "", SubCount = 0, Title = ""};
+            YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
+            var channelStats = yt.Channels.List("statistics");
+            channelStats.Id = id;
+
+            if (id.Length != 24)
+                return toReturn;
+
+            try
+            {
+                var channelStatsResponse = channelStats.Execute();
+                if (channelStatsResponse.Items.Count == 1)
+                {
+                    toReturn.Title = "";
+                    toReturn.Banner = "";
+                    toReturn.SubCount = channelStatsResponse.Items[0].Statistics.SubscriberCount;
+                    toReturn.Id = id;
+                }
+                else
+                {
+                    return toReturn;
+                }
+
+                var channelContent = yt.Channels.List("snippet");
+                channelContent.Id = id;
+                var channelContentResponse = channelContent.Execute();
+                if (channelContentResponse.Items.Count == 1)
+                {
+                    toReturn.Title = channelContentResponse.Items[0].Snippet.Title;
+                }
+
+                var channelImage = yt.Channels.List("brandingSettings");
+                channelImage.Id = id;
+                var channelImageResponse = channelImage.Execute();
+                if (channelImageResponse.Items.Count == 1)
+                {
+                    toReturn.Banner = channelImageResponse.Items[0].BrandingSettings.Image.BannerImageUrl;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            return toReturn;
+        }
     }
 }
