@@ -36,42 +36,59 @@ namespace Dashboard.Models.youtube
             return uri.Segments.Last();
         }
 
-        public VideoYoutube GetVideo(string url)
+        public VideoYoutube GetVideoById(string id)
         {
             VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
+            var videoStats = yt.Videos.List("statistics");
+            videoStats.Id = id;
+
+            if (id.Length != 11)
+                return toReturn;
+
+            try
+            {
+                var videoStatsResponse = videoStats.Execute();
+                if (videoStatsResponse.Items.Count == 1)
+                {
+                    toReturn.Title = "";
+                    toReturn.VideoUrl = "https://www.youtube.com/embed/" + id.ToString();
+                    toReturn.likes = videoStatsResponse.Items[0].Statistics.LikeCount;
+                    toReturn.dislikes = videoStatsResponse.Items[0].Statistics.DislikeCount;
+                    toReturn.viewCount = videoStatsResponse.Items[0].Statistics.ViewCount;
+                }
+                else
+                {
+                    return toReturn;
+                }
+
+                var videoContent = yt.Videos.List("snippet");
+                videoContent.Id = id;
+                var videoContentResponse = videoContent.Execute();
+                if (videoContentResponse.Items.Count == 1)
+                {
+                    toReturn.Title = videoContentResponse.Items[0].Snippet.Title;
+                }
+
+            } catch (Exception ex) {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            return toReturn;
+        }
+
+        public VideoYoutube GetVideoByUrl(string url)
+        {
+            VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
             string id = GetIdVideo(url);
 
             if (id == null)
             {
                 return toReturn;
             }
-
-            var videoStats = yt.Videos.List("statistics");
-            videoStats.Id = id;
-            var videoStatsResponse = videoStats.Execute();
-            if (videoStatsResponse.Items.Count == 1)
-            {
-                toReturn.Title = "";
-                toReturn.VideoUrl = "https://www.youtube.com/embed/" + id.ToString();
-                toReturn.likes = videoStatsResponse.Items[0].Statistics.LikeCount;
-                toReturn.dislikes = videoStatsResponse.Items[0].Statistics.DislikeCount;
-                toReturn.viewCount = videoStatsResponse.Items[0].Statistics.ViewCount;
-            } else {
-                return toReturn;
-            }
-
-            var videoContent = yt.Videos.List("snippet");
-            videoContent.Id = id;
-            var videoContentResponse = videoContent.Execute();
-            if (videoContentResponse.Items.Count == 1)
-            {
-                toReturn.Title = videoContentResponse.Items[0].Snippet.Title;
-            }
-            return toReturn;
+            return GetVideoById(id);
         }
 
-    public  List<VideoYoutube> GetChannelVideo()
+        public  List<VideoYoutube> GetChannelVideo()
         {
             List<VideoYoutube> toReturn = new List<VideoYoutube>();
 

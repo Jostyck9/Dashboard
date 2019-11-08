@@ -7,6 +7,13 @@ namespace Dashboard.Models.youtube
 {
     interface IYoutubeModel
     {
-        public VideoYoutube GetVideo(string url);
+        public VideoYoutube GetVideoByUrl(string url);
+        public VideoYoutube GetVideoById(string id);
+        //public List<VideoYoutube> SearchVideos(string query);
+
+        //public List<ChannelYoutube> SearchChannels(string query);
+        //public ChannelYoutube GetChannelByUrl(string url);
+        //public ChannelYoutube GetChannelById(string id);
+        //public ChannelYoutube GetChannelByUsername(string username);
     }
 }

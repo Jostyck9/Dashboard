@@ -14,7 +14,7 @@ namespace Dashboard.Controllers
         {
             List<VideoYoutube> res = new List<VideoYoutube>
             {
-                youtubeModel.GetVideo("https://www.youtube.com/watch?v=xv7MziaiN44")
+                youtubeModel.GetVideoByUrl("https://www.youtube.com/watch?v=xv7MziaiN44")
             };
             return View(res);
         }
