@@ -9,9 +9,13 @@ namespace Dashboard.Controllers
 {
     public class YoutubeController : Controller
     {
+        private IYoutubeModel youtubeModel = new YoutubeModel();
         public IActionResult Index()
         {
-            var res = YoutubeModel.getVideo();
+            List<VideoYoutube> res = new List<VideoYoutube>
+            {
+                youtubeModel.GetVideo("https://www.youtube.com/watch?v=xv7MziaiN44")
+            };
             return View(res);
         }
     }

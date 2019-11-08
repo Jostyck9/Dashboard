@@ -1,0 +1,30 @@
+﻿@model Dashboard.Models.youtube.VideoYoutube
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@if (Model.VideoUrl != "")
+{
+    <div class="card text-center">
+        <div class="card embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=@Model.VideoUrl allowfullscreen=""></iframe>
+        </div>
+        <h5 class="card-title">@Model.Title</h5>
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <p class="card-text">@Model.likes</p>
+                    <p class="card-text"><small class="text-muted">Likes</small></p>
+                </div>
+                <div class="col-md-4">
+                    <p class="card-text">@Model.viewCount</p>
+                    <p class="card-text"><small class="text-muted">Views</small></p>
+                </div>
+                <div class="col-md-4">
+                    <p class="card-text">@Model.dislikes</p>
+                    <p class="card-text"><small class="text-muted">Dislikes</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
