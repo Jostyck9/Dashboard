@@ -9,7 +9,7 @@ namespace Dashboard.Models.youtube
     {
         public VideoYoutube GetVideoByUrl(string url);
         public VideoYoutube GetVideoById(string id);
-        //public List<VideoYoutube> SearchVideos(string query);
+         public List<VideoYoutube> SearchVideos(string query, int maxRes = 50);
 
         //public List<ChannelYoutube> SearchChannels(string query);
         //public ChannelYoutube GetChannelByUrl(string url);

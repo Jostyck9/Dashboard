@@ -10,8 +10,8 @@ namespace Dashboard.Models.youtube
 {
     public class YoutubeModel : IYoutubeModel
     {
-        const string MYYOUTUBE_CHANNEL = "SampleChannel";
         const string MyYOUTUBE_DEVELOPER_KEY = "AIzaSyC3aU9QVuq8vtkYlj0cJzK0CyL8vZ5d_78";
+        const string BASE_URL = "https://www.youtube.com/embed/";
         private static string[] validAuthorities = { "youtube.com", "www.youtube.com", "youtu.be", "www.youtu.be" };
 
         private bool ValidUrl(string url)
@@ -52,7 +52,7 @@ namespace Dashboard.Models.youtube
                 if (videoStatsResponse.Items.Count == 1)
                 {
                     toReturn.Title = "";
-                    toReturn.VideoUrl = "https://www.youtube.com/embed/" + id.ToString();
+                    toReturn.VideoUrl = BASE_URL + id.ToString();
                     toReturn.likes = videoStatsResponse.Items[0].Statistics.LikeCount;
                     toReturn.dislikes = videoStatsResponse.Items[0].Statistics.DislikeCount;
                     toReturn.viewCount = videoStatsResponse.Items[0].Statistics.ViewCount;
@@ -88,38 +88,31 @@ namespace Dashboard.Models.youtube
             return GetVideoById(id);
         }
 
-        public  List<VideoYoutube> GetChannelVideo()
+        public List<VideoYoutube> SearchVideos(string query, int maxRes = 50)
         {
-            List<VideoYoutube> toReturn = new List<VideoYoutube>();
-
+            var toReturn = new List<VideoYoutube>();
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
-            ChannelsResource.ListRequest channelsListRequest = yt.Channels.List("contentDetails");
-            channelsListRequest.ForUsername = "aMOODIEsqueezie";
-            var channelsListResponse = channelsListRequest.Execute();
-            foreach (var channel in channelsListResponse.Items)
+            var searchListRequest = yt.Search.List("snippet");
+
+            if (query == string.Empty)
             {
-                // of videos uploaded to the authenticated user's channel.
-                var uploadsListId = channel.ContentDetails.RelatedPlaylists.Uploads;
-                var playlistItemsListRequest = yt.PlaylistItems.List("snippet");
-                playlistItemsListRequest.PlaylistId = uploadsListId;
-                playlistItemsListRequest.MaxResults = 50;
-                // Retrieve the list of videos uploaded to the authenticated user's channel.
-                var playlistItemsListResponse = playlistItemsListRequest.Execute();
-                foreach (var playlistItem in playlistItemsListResponse.Items)
+                return toReturn;
+            }
+            searchListRequest.Q = query; // Replace with your search term.
+            searchListRequest.MaxResults = maxRes;
+            try
+            {
+                var searchListResponse = searchListRequest.Execute();
+                foreach (var searchResult in searchListResponse.Items)
                 {
-                    var videoRequest = yt.Videos.List("statistics");
-                    videoRequest.Id = playlistItem.Snippet.ResourceId.VideoId;
-                    var videoResponse= videoRequest.Execute();
-                    var toAdd = new VideoYoutube { VideoUrl = "https://www.youtube.com/embed/" + playlistItem.Snippet.ResourceId.VideoId, Title = playlistItem.Snippet.Title, likes = 0, dislikes = 0, viewCount = 0 };
-                    if (videoResponse.Items.Count == 1)
+                    if (searchResult.Id.Kind == "youtube#video")
                     {
-                        toAdd.likes = videoResponse.Items[0].Statistics.LikeCount;
-                        toAdd.dislikes = videoResponse.Items[0].Statistics.DislikeCount;
-                        toAdd.viewCount = videoResponse.Items[0].Statistics.ViewCount;
+                        toReturn.Add(new VideoYoutube { Title = searchResult.Snippet.Title, VideoUrl = BASE_URL + searchResult.Id.VideoId, dislikes = 0, likes = 0, viewCount = 0 });
                     }
-                    toReturn.Add(toAdd);
-                    Console.WriteLine(playlistItem.ToString());
                 }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return toReturn;
         }

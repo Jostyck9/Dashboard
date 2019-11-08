@@ -10,13 +10,13 @@ namespace Dashboard.Controllers
     public class YoutubeController : Controller
     {
         private IYoutubeModel youtubeModel = new YoutubeModel();
-        public IActionResult Index()
+        public IActionResult Index(string query = "Pokemon")
         {
-            List<VideoYoutube> res = new List<VideoYoutube>
+            /*List<VideoYoutube> res = new List<VideoYoutube>
             {
                 youtubeModel.GetVideoByUrl("https://www.youtube.com/watch?v=xv7MziaiN44")
-            };
-            return View(res);
+            };*/
+            return View(youtubeModel.SearchVideos(query));
         }
     }
 }
