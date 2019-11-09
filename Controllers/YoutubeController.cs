@@ -11,15 +11,15 @@ namespace Dashboard.Controllers
     {
         private IYoutubeModel youtubeModel = new YoutubeModel();
 
-        public IActionResult Index(string query = "Pokemon")
+        public async Task<IActionResult> Index(string query = "Pokemon")
         {
-            return View(youtubeModel.SearchVideos(query));
+            return View(await youtubeModel.SearchVideos(query));
         }
 
         [HttpGet("[controller]/[action]/{query?}")]
-        public IActionResult Channels(string query = "")
+        public async Task<IActionResult> Channels(string query = "")
         {
-            var res = youtubeModel.SearchChannels(query);
+            var res = await youtubeModel.SearchChannels(query);
             return View(res);
         }
     }

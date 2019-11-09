@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
@@ -36,7 +37,7 @@ namespace Dashboard.Models.youtube
             return uri.Segments.Last();
         }
 
-        public VideoYoutube GetVideoById(string id)
+        public async Task<VideoYoutube> GetVideoById(string id)
         {
             VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
@@ -48,7 +49,7 @@ namespace Dashboard.Models.youtube
 
             try
             {
-                var videoStatsResponse = videoStats.Execute();
+                var videoStatsResponse = await videoStats.ExecuteAsync();
                 if (videoStatsResponse.Items.Count == 1)
                 {
                     toReturn.Title = "";
@@ -64,7 +65,7 @@ namespace Dashboard.Models.youtube
 
                 var videoContent = yt.Videos.List("snippet");
                 videoContent.Id = id;
-                var videoContentResponse = videoContent.Execute();
+                var videoContentResponse = await videoContent.ExecuteAsync();
                 if (videoContentResponse.Items.Count == 1)
                 {
                     toReturn.Title = videoContentResponse.Items[0].Snippet.Title;
@@ -76,7 +77,7 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
-        public VideoYoutube GetVideoByUrl(string url)
+        public async Task<VideoYoutube> GetVideoByUrl(string url)
         {
             VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
             string id = GetIdVideo(url);
@@ -85,10 +86,10 @@ namespace Dashboard.Models.youtube
             {
                 return toReturn;
             }
-            return GetVideoById(id);
+            return await GetVideoById(id);
         }
 
-        public List<VideoYoutube> SearchVideos(string query, int maxRes = 50)
+        public async Task<List<VideoYoutube>> SearchVideos(string query, int maxRes = 50)
         {
             var toReturn = new List<VideoYoutube>();
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
@@ -102,7 +103,7 @@ namespace Dashboard.Models.youtube
             searchListRequest.MaxResults = maxRes;
             try
             {
-                var searchListResponse = searchListRequest.Execute();
+                var searchListResponse = await searchListRequest.ExecuteAsync();
                 foreach (var searchResult in searchListResponse.Items)
                 {
                     if (searchResult.Id.Kind == "youtube#video")
@@ -117,7 +118,7 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
-        public List<ChannelYoutube> SearchChannels(string query, int maxRes = 20)
+        public async Task<List<ChannelYoutube>> SearchChannels(string query, int maxRes = 20)
         {
             var toReturn = new List<ChannelYoutube>();
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
@@ -131,12 +132,12 @@ namespace Dashboard.Models.youtube
             searchListRequest.MaxResults = maxRes;
             try
             {
-                var searchListResponse = searchListRequest.Execute();
+                var searchListResponse = await searchListRequest.ExecuteAsync();
                 foreach (var searchResultChannel in searchListResponse.Items)
                 {
                     if (searchResultChannel.Id.Kind == "youtube#channel")
                     {
-                        toReturn.Add(GetChannelById(searchResultChannel.Id.ChannelId));
+                        toReturn.Add(await GetChannelById(searchResultChannel.Id.ChannelId));
                     }
                 }
             }
@@ -147,7 +148,7 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
-        public ChannelYoutube GetChannelById(string id)
+        public async Task<ChannelYoutube> GetChannelById(string id)
         {
             ChannelYoutube toReturn = new ChannelYoutube {Id = "", SubCount = 0, Title = ""};
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
@@ -159,7 +160,7 @@ namespace Dashboard.Models.youtube
 
             try
             {
-                var channelStatsResponse = channelStats.Execute();
+                var channelStatsResponse = await channelStats.ExecuteAsync();
                 if (channelStatsResponse.Items.Count == 1)
                 {
                     toReturn.Title = "";
@@ -174,7 +175,7 @@ namespace Dashboard.Models.youtube
 
                 var channelContent = yt.Channels.List("snippet");
                 channelContent.Id = id;
-                var channelContentResponse = channelContent.Execute();
+                var channelContentResponse = await channelContent.ExecuteAsync();
                 if (channelContentResponse.Items.Count == 1)
                 {
                     toReturn.Title = channelContentResponse.Items[0].Snippet.Title;
@@ -182,7 +183,7 @@ namespace Dashboard.Models.youtube
 
                 var channelImage = yt.Channels.List("brandingSettings");
                 channelImage.Id = id;
-                var channelImageResponse = channelImage.Execute();
+                var channelImageResponse = await channelImage.ExecuteAsync();
                 if (channelImageResponse.Items.Count == 1)
                 {
                     toReturn.Banner = channelImageResponse.Items[0].BrandingSettings.Image.BannerImageUrl;
