@@ -109,6 +109,7 @@ namespace Dashboard.Models.youtube
                     if (searchResult.Id.Kind == "youtube#video")
                     {
                         toReturn.Add(new VideoYoutube { Title = searchResult.Snippet.Title, VideoUrl = BASE_URL + searchResult.Id.VideoId, dislikes = 0, likes = 0, viewCount = 0 });
+                        /*toReturn.Add(await GetVideoById(searchResult.Id.VideoId)); //Too long to execute for each video*/
                     }
                 }
             } catch (Exception ex)

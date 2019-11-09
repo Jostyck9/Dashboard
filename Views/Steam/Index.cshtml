@@ -1,0 +1,17 @@
+﻿@model Dashboard.Models.Steam.AppList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Applist != null && Model.Applist.Apps != null)
+{
+    <div class="card-columns">
+        @foreach (var game in Model.Applist.Apps)
+        {
+
+            @Html.Partial("_GameCard", game)
+        }
+    </div>
+}
+
