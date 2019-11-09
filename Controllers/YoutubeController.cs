@@ -13,15 +13,11 @@ namespace Dashboard.Controllers
 
         public IActionResult Index(string query = "Pokemon")
         {
-            /*List<VideoYoutube> res = new List<VideoYoutube>
-            {
-                youtubeModel.GetVideoByUrl("https://www.youtube.com/watch?v=xv7MziaiN44")
-            };*/
-
             return View(youtubeModel.SearchVideos(query));
         }
 
-        public IActionResult Channels(string query = "Squeezie")
+        [HttpGet("[controller]/[action]/{query?}")]
+        public IActionResult Channels(string query = "")
         {
             var res = youtubeModel.SearchChannels(query);
             return View(res);

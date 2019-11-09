@@ -1,0 +1,10 @@
+﻿@model Dashboard.Models.Weather.WeatherData
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="card-columns">
+        @Html.Partial("_WeatherCard", Model)
+    </div>
+
