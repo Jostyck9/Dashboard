@@ -9,5 +9,6 @@ namespace Dashboard.Models.Steam
     {
         public Task<AppList> GetGameList();
         public Task<List<SteamGame>> SearchGame(string query);
+        public Task<AppNewsData> GetLastNews(string appId, ulong count = 1, ulong maxLength = 500);
     }
 }

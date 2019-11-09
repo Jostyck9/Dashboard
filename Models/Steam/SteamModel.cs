@@ -45,12 +45,33 @@ namespace Dashboard.Models.Steam
 
             foreach (var game in list.Applist.Apps)
             {
-                if (game.Name.Contains(query))
+                if (game.Name.ToLower().Contains(query.ToLower()))
                 {
                     res.Add(game);
                 }
             }
             return res;
+        }
+
+        public async Task<AppNewsData> GetLastNews(string appId, ulong count = 1, ulong maxLength = 500)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(BASE_URL);
+                    var response = await client.GetAsync($"/ISteamNews/GetNewsForApp/v0002/?appid={appId}&count={count}&maxlength={maxLength}");
+                    response.EnsureSuccessStatusCode();
+
+                    var stringResult = await response.Content.ReadAsStringAsync();
+                    var res = JsonConvert.DeserializeObject<AppNewsData>(stringResult);
+                    return res;
+                }
+                catch (HttpRequestException _)
+                {
+                    return new AppNewsData();
+                }
+            }
         }
     }
 }

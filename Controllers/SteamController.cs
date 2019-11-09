@@ -23,5 +23,12 @@ namespace Dashboard.Controllers
             var data = await Model.SearchGame(query);
             return View(data);
         }
+
+        [HttpGet("[controller]/[action]/{appId}/{count?}")]
+        public async Task<IActionResult> News(string appId, ulong count = 1)
+        {
+            var data = await Model.GetLastNews(appId, count);
+            return View(data);
+        }
     }
 }
