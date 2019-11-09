@@ -8,6 +8,6 @@ namespace Dashboard.Models.Steam
     public class NewsItemsData
     {
         public ulong AppId { get; set; }
-        public IEnumerable<NewsData> NewsItems { get; set; }
+        public List<NewsData> NewsItems { get; set; }
     }
 }
