@@ -74,5 +74,30 @@ namespace Dashboard.Models.Steam
                 }
             }
         }
+        public async Task<ResponseData> GetCurrentPlayersGame(string appId)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(BASE_URL);
+                    var response = await client.GetAsync($"/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid={appId}");
+                    response.EnsureSuccessStatusCode();
+
+                    var stringResult = await response.Content.ReadAsStringAsync();
+                    var res = JsonConvert.DeserializeObject<ResponseData>(stringResult);
+                    return res;
+                }
+                catch (HttpRequestException _)
+                {
+                    return new ResponseData { Response = null};
+                }
+            }
+        }
+
+        public async Task<String> GetGameBanner(string appId)
+        {
+            return "https://steamcdn-a.akamaihd.net/steam/apps/" + appId + "/header.jpg?t=1570039639";
+        }
     }
 }

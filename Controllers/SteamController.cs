@@ -30,5 +30,14 @@ namespace Dashboard.Controllers
             var data = await Model.GetLastNews(appId, count);
             return View(data);
         }
+
+        [HttpGet("[controller]/[action]/{appId}")]
+        public async Task<IActionResult> Players(string appId)
+        {
+            GameData res = new GameData();
+            res.Banner = await Model.GetGameBanner(appId);
+            res.data = await Model.GetCurrentPlayersGame(appId);
+            return View(res);
+        }
     }
 }
