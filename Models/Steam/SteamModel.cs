@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Dashboard.Models.Steam.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,9 +96,32 @@ namespace Dashboard.Models.Steam
             }
         }
 
-        public async Task<String> GetGameBanner(string appId)
+        public String GetGameBanner(string appId)
         {
             return "https://steamcdn-a.akamaihd.net/steam/apps/" + appId + "/header.jpg?t=1570039639";
+        }
+
+        public async Task<AchievementList> GetAchievementGame(string appId)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri(BASE_URL);
+                    var response = await client.GetAsync($"ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid={appId}");
+                    response.EnsureSuccessStatusCode();
+
+                    var stringResult = await response.Content.ReadAsStringAsync();
+                    var res = JsonConvert.DeserializeObject<AchievementResponse>(stringResult);
+                    if (res != null && res.Achievementpercentages != null)
+                        return res.Achievementpercentages;
+                    throw new HttpRequestException();
+                }
+                catch (HttpRequestException _)
+                {
+                    return new AchievementList { Achievements = null };
+                }
+            }
         }
     }
 }
