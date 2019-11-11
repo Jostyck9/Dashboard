@@ -1,0 +1,49 @@
+﻿@model Dashboard.Models.Steam.Data.AchievementList
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <div class="shadow card text-center rounded">
+        <ul class="list-group list-group-flush">
+            @for (var i = 0; i < Model.Achievements.Count() && i < 5; i++)
+            {
+                <li class="list-group-item">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <h5 class="card-title">@Model.Achievements.ElementAt(i).Name</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="card-text">@Model.Achievements.ElementAt(i).Percent %</p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+        @if (Model.Achievements.Count() > 5)
+        {
+            <div class="pos-f-t">
+                <div class="collapse" id="navbarToggleExternalContent">
+                    <ul class="list-group list-group-flush">
+                        @for (var i = 5; i < Model.Achievements.Count(); i++)
+                        {
+                            <li class="list-group-item">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <h5 class="card-title">@Model.Achievements.ElementAt(i).Name</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="card-text">@Model.Achievements.ElementAt(i).Percent %</p>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <nav class="navbar navbar-dark bg-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </nav>
+            </div>
+        }
+    </div>
