@@ -19,7 +19,6 @@ namespace Dashboard.Controllers
             _logger = logger;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             Dal test = new Dal();
