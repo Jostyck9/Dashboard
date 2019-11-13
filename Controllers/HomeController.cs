@@ -23,9 +23,6 @@ namespace Dashboard.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        /*private readonly IYoutubeModel _ytModel = new YoutubeModel();
-        private readonly IWeatherModel _wModel = new WeatherModel();
-        private readonly ISteamModel _sModel = new SteamModel();*/
         private readonly IWidgetFactory _factory = new WidgetFactory();
         private IDal _widgetsSettings;
 
@@ -62,12 +59,6 @@ namespace Dashboard.Controllers
             List<IWidget> res = null;
 
             if (HttpContext.User.Identity.IsAuthenticated) {
-                /*res.Add(new WidgetVideoYoutube { Data = await _ytModel.GetVideoById("wZZ7oFKsKzY") });
-                res.Add(new WidgetChannelYoutube { Data = await _ytModel.GetChannelById("UCYGjxo5ifuhnmvhPvCc3DJQ") });
-                res.Add(new WidgetWeather { Data = await _wModel.GetWeatherByLocation("London") });
-                res.Add(new WidgetNewsSteam { Data = await _sModel.GetLastNews("440", 2) });
-                res.Add(new WidgetPlayersGameSteam { Data = new GameData { data = await _sModel.GetCurrentPlayersGame("440"), Banner = _sModel.GetGameBanner("440") } });
-                res.Add(new WidgetAchievementsSteam { Data = await _sModel.GetAchievementGame("440") });*/
                 var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (currentUser != null)
                 {
