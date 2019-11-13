@@ -42,8 +42,8 @@ namespace Dashboard
             services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
 
             //auth
-            services.AddAuthentication()
-                .AddGoogle(options =>
+            services.AddAuthentication();
+                /*.AddGoogle(options =>
                 {
                     IConfigurationSection googleAuthNSection =
                         Configuration.GetSection("Authentication:Google");
@@ -60,7 +60,7 @@ namespace Dashboard
                 {
                     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                     facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                });
+                });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +77,7 @@ namespace Dashboard
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            /*app.UseHttpsRedirection();*/
             app.UseStaticFiles();
 
             app.UseRouting();
