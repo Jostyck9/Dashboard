@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="XUnitTestProject\**" />
+    <Content Remove="XUnitTestProject\**" />
+    <EmbeddedResource Remove="XUnitTestProject\**" />
+    <None Remove="XUnitTestProject\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="MyTest.db-shm" />
   </ItemGroup>
 
