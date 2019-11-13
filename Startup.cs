@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Dashboard
 {
@@ -30,23 +32,35 @@ namespace Dashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=MyTest.db"));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
 
-            //google auth
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
+            //auth
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
 
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
-            });
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                })
+                .AddMicrosoftAccount(microsoftOptions =>
+                {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,7 +90,20 @@ namespace Dashboard
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
+            });
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.EnsureCreated();
+            }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                ForwardedHeaders.XForwardedProto
             });
         }
     }

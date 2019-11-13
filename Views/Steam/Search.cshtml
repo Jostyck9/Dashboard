@@ -1,0 +1,12 @@
+﻿@model List<Dashboard.Models.Steam.SteamGame>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-columns">
+    @foreach (var game in Model)
+    {
+        @Html.Partial("_GameCard", game)
+    }
+</div>

@@ -1,0 +1,12 @@
+﻿@model List<Dashboard.Models.youtube.VideoYoutube>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="card-columns">
+        @foreach (var video in Model)
+        {
+            @Html.Partial("_VideoCard", video)
+        }
+    </div>
