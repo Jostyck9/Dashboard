@@ -38,24 +38,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Add the content here -->
-
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#channelTab" aria-controls="channelTab" role="tab" data-toggle="tab">Channels</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#videoTab" aria-controls="videoTab" role="tab" data-toggle="tab">Videos</a>
-                            </li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="channelTab">upload Tab</div>
-                            <div role="tabpanel" class="tab-pane" id="videoTab">browseTab</div>
-                        </div>
-                    </div>
-
+                        @await Html.PartialAsync("_channelAdd")
                     <!--end-->
                 </div>
             </div>
