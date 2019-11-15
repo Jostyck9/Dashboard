@@ -28,3 +28,29 @@ $(function () {
         return false;
     });
 });
+
+$(function () {
+    $('label#error_location').hide();
+    $('.alert').hide();
+    $("button#weather_submit").click(function () {
+        $('.alert-danger').hide();
+        var location = $("input#location").val();
+        if (location == "") {
+            $(".alert-danger").show();
+            $("input#location").focus();
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "Edit/AddWeather",
+            data: "location=" + location,
+            success: function () {
+                $('div#succes_weather').show("fast");
+            },
+            error: function () {
+                $('div#error_weather').show("fast");
+            }
+        });
+        return false;
+    });
+});

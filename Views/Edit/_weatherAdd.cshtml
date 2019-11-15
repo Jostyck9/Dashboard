@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <div class="modal-body">
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="location">Weather's location</label>
+                <input class="form-control" id="location" aria-describedby="location" placeholder="Enter a valid location">
+                <label class="alert-danger" for="location" id="error_location">The location needs to be valid</label>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col text-left">
+                    <button type="submit" class="btn btn-primary" id="weather_submit">Submit</button>
+                </div>
+                <div class="col text-right">
+                    <div class="alert alert-success" role="alert" id="succes_weather">
+                        Weather add to your dashboard
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="error_weather">
+                        Error to add this weather location
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

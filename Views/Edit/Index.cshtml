@@ -74,13 +74,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <!-- Insert here -->
-                    La meteo
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                @await Html.PartialAsync("_weatherAdd")
             </div>
         </div>
     </div>
