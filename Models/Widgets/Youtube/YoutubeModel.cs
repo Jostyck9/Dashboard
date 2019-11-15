@@ -26,7 +26,7 @@ namespace Dashboard.Models.youtube
 
         private string GetIdVideo(string url)
         {
-            if (!ValidUrl(url))
+            if (url == null || !ValidUrl(url))
                 return null;
             var uri = new Uri(url);
             var query = HttpUtility.ParseQueryString(uri.Query);
@@ -39,7 +39,7 @@ namespace Dashboard.Models.youtube
 
         public async Task<VideoYoutube> GetVideoById(string id)
         {
-            VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
+            VideoYoutube toReturn = new VideoYoutube { Dislikes = 0, Likes = 0, Title = "", VideoUrl = "", VideoId = "",  ViewCount = 0 };
             YouTubeService yt = new YouTubeService(new BaseClientService.Initializer() { ApiKey = MyYOUTUBE_DEVELOPER_KEY });
             var videoStats = yt.Videos.List("statistics");
             videoStats.Id = id;
@@ -53,10 +53,11 @@ namespace Dashboard.Models.youtube
                 if (videoStatsResponse.Items.Count == 1)
                 {
                     toReturn.Title = "";
+                    toReturn.VideoId = id;
                     toReturn.VideoUrl = BASE_URL + id.ToString();
-                    toReturn.likes = videoStatsResponse.Items[0].Statistics.LikeCount;
-                    toReturn.dislikes = videoStatsResponse.Items[0].Statistics.DislikeCount;
-                    toReturn.viewCount = videoStatsResponse.Items[0].Statistics.ViewCount;
+                    toReturn.Likes = videoStatsResponse.Items[0].Statistics.LikeCount;
+                    toReturn.Dislikes = videoStatsResponse.Items[0].Statistics.DislikeCount;
+                    toReturn.ViewCount = videoStatsResponse.Items[0].Statistics.ViewCount;
                 }
                 else
                 {
@@ -79,7 +80,7 @@ namespace Dashboard.Models.youtube
 
         public async Task<VideoYoutube> GetVideoByUrl(string url)
         {
-            VideoYoutube toReturn = new VideoYoutube { dislikes = 0, likes = 0, Title = "", VideoUrl = "", viewCount = 0 };
+            VideoYoutube toReturn = new VideoYoutube { Dislikes = 0, Likes = 0, Title = "", VideoUrl = "", ViewCount = 0 };
             string id = GetIdVideo(url);
 
             if (id == null)
@@ -108,7 +109,7 @@ namespace Dashboard.Models.youtube
                 {
                     if (searchResult.Id.Kind == "youtube#video")
                     {
-                        toReturn.Add(new VideoYoutube { Title = searchResult.Snippet.Title, VideoUrl = BASE_URL + searchResult.Id.VideoId, dislikes = 0, likes = 0, viewCount = 0 });
+                        toReturn.Add(new VideoYoutube { Title = searchResult.Snippet.Title, VideoUrl = BASE_URL + searchResult.Id.VideoId, VideoId = searchResult.Id.VideoId, Dislikes = 0, Likes = 0, ViewCount = 0 });
                         /*toReturn.Add(await GetVideoById(searchResult.Id.VideoId)); //Too long to execute for each video*/
                     }
                 }

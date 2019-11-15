@@ -8,9 +8,10 @@ namespace Dashboard.Models.youtube
     public class VideoYoutube
     {
         public string VideoUrl { get; set; }
+        public string VideoId { get; set; }
         public string Title { get; set; }
-        public ulong? viewCount { get; set; }
-        public ulong? dislikes { get; set; }
-        public ulong? likes { get; set; }
+        public ulong? ViewCount { get; set; }
+        public ulong? Dislikes { get; set; }
+        public ulong? Likes { get; set; }
     }
 }
