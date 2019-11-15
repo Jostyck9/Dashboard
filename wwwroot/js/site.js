@@ -54,3 +54,38 @@ $(function () {
         return false;
     });
 });
+
+$(function () {
+    $('label#error_appId').hide();
+    $('.alert').hide();
+    $("button#steam_submit").click(function () {
+        $('.alert-danger').hide();
+        var appId = $("input#appId").val();
+        if (appId == "") {
+            $(".alert-danger").show();
+            $("input#appId").focus();
+            return false;
+        }
+        var type = $('input[name=radioSteam]:checked').val();
+        var urlRedirection = "Edit/"
+        if (type == "players") {
+            urlRedirection += "AddPlayersSteam";
+        } else if (type == "news") {
+            urlRedirection += "AddNewsSteam";
+        } else if (type == "achievements") {
+            urlRedirection += "AddAchievementSteam";
+        }
+        $.ajax({
+            type: "POST",
+            url: urlRedirection,
+            data: "appId=" + appId,
+            success: function () {
+                $('div#succes_steam').show("fast");
+            },
+            error: function () {
+                $('div#error_steam').show("fast");
+            }
+        });
+        return false;
+    });
+});

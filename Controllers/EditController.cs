@@ -74,5 +74,23 @@ namespace Dashboard.Controllers
             }
             return true;
         }
+
+        [HttpPost, Authorize]
+        public async Task<bool> AddNewsSteam(string appId)
+        {
+            return true;
+        }
+
+        [HttpPost, Authorize]
+        public async Task<bool> AddPlayersSteam(string appId)
+        {
+            return true;
+        }
+
+        [HttpPost, Authorize]
+        public async Task<bool> AddAchievementSteam(string appId)
+        {
+            return true;
+        }
     }
 }
