@@ -14,9 +14,43 @@
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
+
+        <!-- Channel Youtube tab -->
         <div role="tabpanel" class="tab-pane active" id="channelTab">
 
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="idChannel">Channel to add</label>
+                    <input class="form-control" id="idChannel" aria-describedby="idChannel" placeholder="Enter a valid id">
+                    <label class="alert-danger" for="idChannel" id="error_idChannel">The id needs to be valid</label>
+                </div>
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-left">
+                            <button type="submit" class="btn btn-primary" id="channel_submit">Submit</button>
+                        </div>
+                        <div class="col text-right">
+                            <div class="alert alert-success" role="alert" id="succes_channel">
+                                Channel add to your dashboard
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="error_channel">
+                                Error to add this channel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
         </div>
+
+
+
+        <!-- Video Youtube Tab -->
         <div role="tabpanel" class="tab-pane" id="videoTab">
 
             <form action="" method="POST">
@@ -31,7 +65,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col text-left">
-                            <button type="submit" class="btn btn-primary" id="channel_submit">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="video_submit">Submit</button>
                         </div>
                         <div class="col text-right">
                             <div class="alert alert-success" role="alert" id="succes_video">

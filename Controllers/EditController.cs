@@ -36,8 +36,19 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
-        public async Task<bool> AddChannelYoutube(string url)
+        public async Task<bool> AddChannelYoutube(string id)
         {
+             ChannelYoutube res = await _ytModel.GetChannelById(id);
+
+            if (res.Id == null || res.Id == "")
+            {
+                return false;
+            }
+            var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.YOUTUBE_CHANNEL_SUB, res.Id);
+            }
             return true;
         }
 
@@ -46,7 +57,7 @@ namespace Dashboard.Controllers
         {
             VideoYoutube res = await _ytModel.GetVideoByUrl(url);
 
-            if (res.VideoId == "")
+            if (res.VideoId == null || res.VideoId == "")
             {
                 return false;
             }
@@ -63,7 +74,7 @@ namespace Dashboard.Controllers
         {
             WeatherData res = await _wModel.GetWeatherByLocation(location);
 
-            if (res.Name == "")
+            if (res.Name == null || res.Name == "")
             {
                 return false;
             }
@@ -78,18 +89,51 @@ namespace Dashboard.Controllers
         [HttpPost, Authorize]
         public async Task<bool> AddNewsSteam(string appId)
         {
+            ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
+
+            if (res == null || res.Response == null)
+            {
+                return false;
+            }
+            var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_NEWS, appId);
+            }
             return true;
         }
 
         [HttpPost, Authorize]
         public async Task<bool> AddPlayersSteam(string appId)
         {
+            ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
+
+            if (res == null || res.Response == null)
+            {
+                return false;
+            }
+            var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_PLAYERS, appId);
+            }
             return true;
         }
 
         [HttpPost, Authorize]
         public async Task<bool> AddAchievementSteam(string appId)
         {
+            ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
+
+            if (res == null || res.Response == null)
+            {
+                return false;
+            }
+            var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_ACHIEVEMENTS, appId);
+            }
             return true;
         }
     }
