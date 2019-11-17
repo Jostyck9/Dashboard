@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dashboard.Models.Steam
 {
-    interface ISteamModel
+    public interface ISteamModel
     {
         public Task<AppList> GetGameList();
         public Task<List<SteamGame>> SearchGame(string query);

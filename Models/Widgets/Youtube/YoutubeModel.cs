@@ -13,18 +13,24 @@ namespace Dashboard.Models.youtube
     {
         const string MyYOUTUBE_DEVELOPER_KEY = "AIzaSyC3aU9QVuq8vtkYlj0cJzK0CyL8vZ5d_78";
         const string BASE_URL = "https://www.youtube.com/embed/";
-        private static string[] validAuthorities = { "youtube.com", "www.youtube.com", "youtu.be", "www.youtu.be" };
+        private static readonly string[] validAuthorities = { "youtube.com", "www.youtube.com", "youtu.be", "www.youtu.be" };
 
         private bool ValidUrl(string url)
         {
-            var uri = new Uri(url);
-            var query = HttpUtility.ParseQueryString(uri.Query);
-            if (!validAuthorities.Contains(uri.Host))
+            try
+            {
+                var uri = new Uri(url);
+                var query = HttpUtility.ParseQueryString(uri.Query);
+                if (!validAuthorities.Contains(uri.Host))
+                    return false;
+            } catch (System.UriFormatException)
+            {
                 return false;
+            }
             return true;
         }
 
-        private string GetIdVideo(string url)
+        public string GetIdVideo(string url)
         {
             if (url == null || !ValidUrl(url))
                 return null;
@@ -34,7 +40,7 @@ namespace Dashboard.Models.youtube
             {
                 return query["v"];
             }
-            return uri.Segments.Last();
+            return null;
         }
 
         public async Task<VideoYoutube> GetVideoById(string id)
