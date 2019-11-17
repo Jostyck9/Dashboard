@@ -32,7 +32,7 @@ namespace Dashboard.Models.WidgetsSettings
 
         public void AddWidget(string userId, WidgetsId widgetId, string parameters)
         {
-            _db.WidgetsSettings.Add(new WidgetSetting { UserId = userId, WidgetId = widgetId, Params = parameters});
+            _db.WidgetsSettings.Add(new WidgetSetting { UserId = userId, WidgetId = widgetId, Params = parameters });
             _db.SaveChanges();
         }
 
@@ -60,11 +60,13 @@ namespace Dashboard.Models.WidgetsSettings
             {
                 widget.Params = parameters;
             }
+            _db.SaveChanges();
         }
 
         public void DeleteAllWidgets()
         {
-            _db.WidgetsSettings.RemoveRange(_db.WidgetsSettings);
+            _db.WidgetsSettings.RemoveRange(_db.WidgetsSettings.ToArray());
+            _db.SaveChanges();
         }
     }
 }

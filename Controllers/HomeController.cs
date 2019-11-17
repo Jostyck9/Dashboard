@@ -36,8 +36,7 @@ namespace Dashboard.Controllers
              * Test for the db and the configured widgets
              * 
              */
-            _widgetsSettings.DeleteAllWidgets();
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.STEAM_PLAYERS, "440");
+            /*_widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.STEAM_PLAYERS, "440");
             _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.STEAM_PLAYERS, "1085660");
             _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.WEATHER, "Nantes");
             _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.YOUTUBE_CHANNEL_SUB, "UCYGjxo5ifuhnmvhPvCc3DJQ");
@@ -46,7 +45,7 @@ namespace Dashboard.Controllers
 
             _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.STEAM_NEWS, "440;2");
             _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.STEAM_PLAYERS, "440");
-            _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.WEATHER, "Paris");
+            _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.WEATHER, "Paris");*/
         }
 
         ~HomeController()

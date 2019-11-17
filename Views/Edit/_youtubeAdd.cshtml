@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#channelTab" aria-controls="channelTab" role="tab" data-toggle="tab">Channels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#videoTab" aria-controls="videoTab" role="tab" data-toggle="tab">Videos</a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <!-- Channel Youtube tab -->
+        <div role="tabpanel" class="tab-pane active" id="channelTab">
+
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="idChannel">Channel to add</label>
+                    <input class="form-control" id="idChannel" aria-describedby="idChannel" placeholder="Enter a valid id">
+                    <label class="alert-danger" for="idChannel" id="error_idChannel">The id needs to be valid</label>
+                </div>
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-left">
+                            <button type="submit" class="btn btn-primary" id="channel_submit">Submit</button>
+                        </div>
+                        <div class="col text-right">
+                            <div class="alert alert-success" role="alert" id="succes_channel">
+                                Channel add to your dashboard
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="error_channel">
+                                Error to add this channel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+
+
+
+        <!-- Video Youtube Tab -->
+        <div role="tabpanel" class="tab-pane" id="videoTab">
+
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="urlVideo">Video to add</label>
+                    <input type="url" class="form-control" id="urlVideo" aria-describedby="urlVideo" placeholder="Enter a valid url">
+                    <label class="alert-danger" for="urlVideo" id="error_urlVideo">The url needs to be valid</label>
+                </div>
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-left">
+                            <button type="submit" class="btn btn-primary" id="video_submit">Submit</button>
+                        </div>
+                        <div class="col text-right">
+                            <div class="alert alert-success" role="alert" id="succes_video">
+                                Video add to your dashboard
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="error_video">
+                                Error to add this video
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+

@@ -11,7 +11,6 @@ namespace Dashboard.Models.Steam
 {
     public class SteamModel : ISteamModel
     {
-        private readonly string API_KEY = "907CC8E30666701472D392675DE32EDB";
         private readonly string BASE_URL = "http://api.steampowered.com";
         private static AppList GameList = null;
 
@@ -33,7 +32,7 @@ namespace Dashboard.Models.Steam
                         GameList = res;
                     return res;
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new AppList();
                 }
@@ -69,7 +68,7 @@ namespace Dashboard.Models.Steam
                     var res = JsonConvert.DeserializeObject<AppNewsData>(stringResult);
                     return res;
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new AppNewsData();
                 }
@@ -89,7 +88,7 @@ namespace Dashboard.Models.Steam
                     var res = JsonConvert.DeserializeObject<ResponseData>(stringResult);
                     return res;
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new ResponseData { Response = null};
                 }
@@ -117,7 +116,7 @@ namespace Dashboard.Models.Steam
                         return res.Achievementpercentages;
                     throw new HttpRequestException();
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new AchievementList { Achievements = null };
                 }
