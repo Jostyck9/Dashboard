@@ -25,3 +25,11 @@ services:
             - my-db:/var/lib/mysql
 volumes:
   my-db:
+
+# version: '3'
+# services:
+#   web:
+#     build: .
+#     ports:
+#       - "8080:80"
+#     image: dashboard

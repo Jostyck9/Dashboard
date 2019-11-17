@@ -19,12 +19,13 @@ $(function () {
             type: "POST",
             url: "Edit/AddVideoYoutube",
             data: "url=" + url,
-            success: function () {
-                $('div#succes_video').show("fast");
-                $("button.close").click();
-            },
-            error: function () {
-                $('div#error_video').show("fast");
+            success: function (result) {
+                if (result == false) {
+                    $('div#error_video').show("fast");
+                } else {
+                    $('div#succes_video').show("fast");
+                    $("button.close").click();
+                }
             }
         });
         return false;
@@ -47,12 +48,13 @@ $(function () {
             type: "POST",
             url: "Edit/AddChannelYoutube",
             data: "id=" + url,
-            success: function () {
-                $('div#succes_channel').show("fast");
-                $("button.close").click();
-            },
-            error: function () {
-                $('div#error_channel').show("fast");
+            success: function (result) {
+                if (result == false) {
+                    $('div#error_channel').show("fast");
+                } else {
+                    $('div#succes_channel').show("fast");
+                    $("button.close").click();
+                }
             }
         });
         return false;
@@ -75,12 +77,13 @@ $(function () {
             type: "POST",
             url: "Edit/AddWeather",
             data: "location=" + location,
-            success: function () {
-                $('div#succes_weather').show("fast");
-                $("button.close").click();
-            },
-            error: function () {
-                $('div#error_weather').show("fast");
+            success: function (result) {
+                if (result == false) {
+                    $('div#error_weather').show("fast");
+                } else {
+                    $('div#succes_weather').show("fast");
+                    $("button.close").click();
+                }
             }
         });
         return false;
@@ -112,11 +115,13 @@ $(function () {
             type: "POST",
             url: urlRedirection,
             data: "appId=" + appId,
-            success: function () {
-                $('div#error_steam').show("fast");
-            },
-            error: function () {
-                $('div#succes_steam').show("fast");
+            success: function (result) {
+                if (result == false) {
+                    $('div#error_steam').show("fast");
+                } else {
+                    $('div#succes_steam').show("fast");
+                    $("button.close").click();
+                }
             }
         });
         return false;

@@ -1,18 +1,20 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# copy csproj and restore as distinct layers
-COPY *.sln .
-COPY ["./Dashboard.csproj", "./"]
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+WORKDIR /src
+COPY ["Dashboard.csproj", ""]
 RUN dotnet restore "./Dashboard.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "Dashboard.csproj" -c Release -o /app/build
 
-# copy everything else and build app
-COPY ./ ./DEV_dashboard_2019/
-WORKDIR /app/DEV_dashboard_2019
-RUN dotnet publish "./Dashboard.csproj" -c Release -o out
+FROM build AS publish
+RUN dotnet publish "Dashboard.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
-EXPOSE 8080
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/DEV_dashboard_2019/out ./
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Dashboard.dll"]

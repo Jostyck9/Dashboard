@@ -68,5 +68,20 @@ namespace Dashboard.Models.WidgetsSettings
             _db.WidgetsSettings.RemoveRange(_db.WidgetsSettings.ToArray());
             _db.SaveChanges();
         }
+
+        public void DeleteWidgetsById(string userId, int id)
+        {
+            var listWidgets = GetWidgetsByUsr(userId);
+
+            foreach (var widget in listWidgets)
+            {
+                if (widget.Id == id)
+                {
+                    _db.WidgetsSettings.Remove(widget);
+                    break;
+                }
+            }
+            _db.SaveChanges();
+        }
     }
 }
