@@ -1,27 +1,35 @@
-version: "3"
+# version: "3"
+# services:
+#     web:
+#         build: .
+#         image: dashboard
+#         ports:
+#              # - "8081:443"
+#             - "8080:80"
+#         depends_on:
+#             - db
+#     db:
+#         image: mysql:latest
+#         restart: always
+#         environment:
+#             MYSQL_DATABASE: "dashboarddb2"
+#             MYSQL_USER: "user"
+#             MYSQL_PASSWORD: "password"
+#             MYSQL_ROOT_PASSWORD: "password"
+#             ACCEPT_EULA: "Y"
+#         ports:
+#             - "3306:3306"
+#         expose:
+#             - "3306"
+#         volumes:
+#             - my-db:/var/lib/mysql
+# volumes:
+#   my-db:
+
+version: '3'
 services:
-    web:
-        build: .
-        image: dashboard
-        ports:
-             # - "8081:443"
-            - "8080:80"
-        depends_on:
-            - db
-    db:
-        image: mysql:latest
-        restart: always
-        environment:
-            MYSQL_DATABASE: "dashboarddb2"
-            MYSQL_USER: "user"
-            MYSQL_PASSWORD: "password"
-            MYSQL_ROOT_PASSWORD: "password"
-            ACCEPT_EULA: "Y"
-        ports:
-            - "3306:3306"
-        expose:
-            - "3306"
-        volumes:
-            - my-db:/var/lib/mysql
-volumes:
-  my-db:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    image: dashboard
