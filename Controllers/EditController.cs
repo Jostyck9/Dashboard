@@ -74,7 +74,7 @@ namespace Dashboard.Controllers
         {
             WeatherData res = await _wModel.GetWeatherByLocation(location);
 
-            if (res.Name == null || res.Name == "")
+            if (res.Name == null || res.Name == "" || res.Main == null)
             {
                 return false;
             }
