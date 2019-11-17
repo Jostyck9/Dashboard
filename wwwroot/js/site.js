@@ -156,3 +156,10 @@ function deleteWidget(id) {
     });
     return false;
 }
+
+function refresh() {
+    $.get('/home/Widgets', function (result) {
+        $('#refreshColumn').html(result);
+    });
+}
+setInterval(refresh, 20000)
