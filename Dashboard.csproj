@@ -7,6 +7,17 @@
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="XUnitTestProject\**" />
+    <Compile Remove="XUnitTest\**" />
+    <Content Remove="XUnitTestProject\**" />
+    <Content Remove="XUnitTest\**" />
+    <EmbeddedResource Remove="XUnitTestProject\**" />
+    <EmbeddedResource Remove="XUnitTest\**" />
+    <None Remove="XUnitTestProject\**" />
+    <None Remove="XUnitTest\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.YouTube.v3" Version="1.42.0.1758" />
