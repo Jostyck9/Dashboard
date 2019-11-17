@@ -7,6 +7,11 @@ namespace Dashboard.Models.Widgets
 {
     public interface IWidget
     {
+        /**
+        * @brief get the type of the widget
+        *
+        * @return a widget Id
+        */
         public WidgetsId GetType();
     }
 

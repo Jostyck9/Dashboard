@@ -20,7 +20,12 @@ namespace Dashboard.Controllers
         {
             _accessor = accessor;
         }
-
+        
+        /**
+        * @brief get the local IP of the user
+        * 
+        * @return a string
+        */
         private string GetLocalIp()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -35,6 +40,11 @@ namespace Dashboard.Controllers
         }
 
         [Route("about.json")]
+        /**
+        * @brief get all the elements to diplay in the about.json
+        * 
+        * @return a model
+        */
         public string About()
         {
             var ip = _accessor.HttpContext?.Connection?.RemoteIpAddress?.ToString();

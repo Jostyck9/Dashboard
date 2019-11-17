@@ -8,6 +8,11 @@ namespace Dashboard.Models.About.Services
 {
     public class YoutubeService : IService
     {
+        /**
+        * @brief get the channel of a widget
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetChannelWidget()
         {
             WidgetData res = new WidgetData
@@ -26,6 +31,11 @@ namespace Dashboard.Models.About.Services
             return res;
         }
 
+        /**
+        * @brief get the video of a widget
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetVideoWidget()
         {
             WidgetData res = new WidgetData
@@ -44,6 +54,11 @@ namespace Dashboard.Models.About.Services
             return res;
         }
 
+        /**
+        * @brief get all the service of a Youtube
+        *
+        * @return a Service Data class
+        */
         public ServiceData GetService()
         {
             ServiceData res = new ServiceData

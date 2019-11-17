@@ -8,6 +8,11 @@ namespace Dashboard.Models.About.Services
 {
     public class WeatherService : IService
     {
+        /**
+        * @brief get the weather of location
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetWeatherWidget()
         {
             WidgetData res = new WidgetData
@@ -26,6 +31,11 @@ namespace Dashboard.Models.About.Services
             return res;
         }
 
+        /**
+        * @brief get all services of weather
+        *
+        * @return a Service Data class
+        */
         public ServiceData GetService()
         {
             ServiceData res = new ServiceData
