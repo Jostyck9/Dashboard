@@ -1,0 +1,9 @@
+﻿@model Dashboard.Models.Steam.GameData
+@{
+    ViewData["Title"] = "Players";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-columns">
+    @Html.Partial("_PlayersGameCard", @Model)
+</div>

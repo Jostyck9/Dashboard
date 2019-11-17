@@ -1,8 +1,59 @@
-﻿@{
+﻿@model List<Dashboard.Models.Widgets.IWidget>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (Model != null && Model.Count() != 0)
+    {
+    <div class="card-columns">
+        @foreach (var widget in Model)
+        {
+            if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_VIDEO)
+                            @await Html.PartialAsync("Youtube/_VideoCard", (widget as Dashboard.Models.Widgets.Youtube.WidgetVideoYoutube).Data)
+            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_CHANNEL_SUB)
+                            @await Html.PartialAsync("Youtube/_ChannelCard", (widget as Dashboard.Models.Widgets.Youtube.WidgetChannelYoutube).Data)
+            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.WEATHER)
+                            @await Html.PartialAsync("Weather/_WeatherCard", (widget as Dashboard.Models.Widgets.Weather.WidgetWeather).Data)
+            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_ACHIEVEMENTS)
+                            @await Html.PartialAsync("Steam/_AchievementsCard", (widget as Dashboard.Models.Widgets.Steam.WidgetAchievementsSteam).Data)
+            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_NEWS)
+                            @await Html.PartialAsync("Steam/_NewsCard", (widget as Dashboard.Models.Widgets.Steam.WidgetNewsSteam).Data)
+            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_PLAYERS)
+                            @await Html.PartialAsync("Steam/_PlayersGameCard", (widget as Dashboard.Models.Widgets.Steam.WidgetPlayersGameSteam).Data)
+        }
+    </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h1>No widgets configure</h1>
+            <a href="/Edit" class="btn btn-lg btn-secondary">Edit</a>
+        </div>
+    }
+    @*<div class="card-columns" id="refreshme">
+        await Html.PartialAsync("_Data", Model)
+    </div>
+    <script type="text/javascript">
+        function refresh() {
+            $.get('/home/data', function (result) {
+                $('#refreshme').html(result);
+                });
+            }
+            setInterval(refresh, 3000)
+    </script>
+    *@
+}
+else
+{
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Dashboard</h1>
+    <p>Create your own dashboard with youtube, steam and weathers services</p>
+    <a href="Identity/Account/Login" class="btn btn-lg btn-secondary">Login</a>
+    <a href="Identity/Account/Register" class="btn btn-lg btn-secondary">Register</a>
 </div>
+}
