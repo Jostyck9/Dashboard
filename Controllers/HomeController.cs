@@ -54,6 +54,11 @@ namespace Dashboard.Controllers
             return View("_columns", res);
         }
 
+        /**
+        * @brief check if the user is authenticated or not and display his saved widgets
+        *
+        * @return a View
+        */
         public async Task<IActionResult> Index()
         {
             List<IWidget> res = null;
@@ -69,12 +74,22 @@ namespace Dashboard.Controllers
             return View(res);
         }
 
+        /**
+        * @brief return the View of the privacy
+        *
+        * @return a view
+        */
         public IActionResult Privacy()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        /**
+        * @brief return the View of the error
+        *
+        * @return a view
+        */
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

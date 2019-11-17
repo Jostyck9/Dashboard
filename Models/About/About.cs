@@ -18,6 +18,11 @@ namespace Dashboard.Models.About
             new YoutubeService()
         };
 
+        /**
+        * @brief get the list of the services
+        *
+        * @return a structure of service informations
+        */
         public List<ServiceData> GetListService()
         {
             List<ServiceData> res = new List<ServiceData>();
@@ -29,6 +34,11 @@ namespace Dashboard.Models.About
             return res;
         }
 
+        /**
+        * @brief get the list of the services and the current server time
+        *
+        * @return a class ServerData
+        */
         public ServerData GetServer()
         {
             ServerData res = new ServerData
@@ -38,7 +48,11 @@ namespace Dashboard.Models.About
             };
             return res;
         }
-
+        /**
+        * @brief get all the informations of the widgets for the about.json
+        *
+        * @return a string
+        */
         public string GetAboutData(string ipClient)
         {
             AboutData res = new AboutData();
