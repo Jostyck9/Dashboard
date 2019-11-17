@@ -23,14 +23,14 @@ namespace Dashboard.Models.Widgets
         {
             if (data.Params == null || data.Params.Length == 0)
                 return null;
-            return new WidgetChannelYoutube { Data = await _ytModel.GetChannelById(data.Params) };
+            return new WidgetChannelYoutube { IdWidget = data.Id, Data = await _ytModel.GetChannelById(data.Params) };
         }
 
         private async Task<IWidget> CreateYtVideoWidget(WidgetSetting data)
         {
             if (data.Params == null || data.Params.Length == 0)
                 return null;
-            return new WidgetVideoYoutube { Data = await _ytModel.GetVideoById(data.Params) };
+            return new WidgetVideoYoutube { IdWidget = data.Id, Data = await _ytModel.GetVideoById(data.Params) };
         }
         private async Task<IWidget> CreateWeatherWidget(WidgetSetting data)
         {
@@ -40,7 +40,7 @@ namespace Dashboard.Models.Widgets
                 return null;
             var parameters = data.Params.Split(';');
             if (parameters.Length == 1)
-                return new WidgetWeather { Data = await _wModel.GetWeatherByLocation(parameters[0]) };
+                return new WidgetWeather { IdWidget = data.Id, Data = await _wModel.GetWeatherByLocation(parameters[0]) };
             try {
                 latitude = float.Parse(parameters[0], CultureInfo.InvariantCulture);
                 longitude = float.Parse(parameters[1], CultureInfo.InvariantCulture);
@@ -48,13 +48,13 @@ namespace Dashboard.Models.Widgets
             catch (Exception) {
                 return null;
             }
-            return new WidgetWeather { Data = await _wModel.GetWeatherByCoord(latitude, longitude) };
+            return new WidgetWeather { IdWidget = data.Id, Data = await _wModel.GetWeatherByCoord(latitude, longitude) };
         }
         private async Task<IWidget> CreateSteamAchievementWidget(WidgetSetting data)
         {
             if (data.Params == null || data.Params.Length == 0)
                 return null;
-            return new WidgetAchievementsSteam { Data = await _sModel.GetAchievementGame(data.Params) };
+            return new WidgetAchievementsSteam { IdWidget = data.Id, Data = await _sModel.GetAchievementGame(data.Params) };
         }
         private async Task<IWidget> CreateSteamNewsWidget(WidgetSetting data)
         {
@@ -64,7 +64,7 @@ namespace Dashboard.Models.Widgets
                 return null;
             var parameters = data.Params.Split(';');
             if (parameters.Length == 1)
-                return new WidgetNewsSteam { Data = await _sModel.GetLastNews(parameters[0]) };
+                return new WidgetNewsSteam { IdWidget = data.Id, Data = await _sModel.GetLastNews(parameters[0]) };
             try
             {
                 count = ulong.Parse(parameters[1]);
@@ -73,14 +73,14 @@ namespace Dashboard.Models.Widgets
             {
                 return null;
             }
-            return new WidgetNewsSteam { Data = await _sModel.GetLastNews(parameters[0], count) };
+            return new WidgetNewsSteam { IdWidget = data.Id, Data = await _sModel.GetLastNews(parameters[0], count) };
         }
 
         private async Task<IWidget> CreatePlayersWidget(WidgetSetting data)
         {
             if (data.Params == null || data.Params.Length == 0)
                 return null;
-            return new WidgetPlayersGameSteam { Data = new GameData { data = await _sModel.GetCurrentPlayersGame(data.Params), Banner = _sModel.GetGameBanner(data.Params) } };
+            return new WidgetPlayersGameSteam { IdWidget = data.Id, Data = new GameData { data = await _sModel.GetCurrentPlayersGame(data.Params), Banner = _sModel.GetGameBanner(data.Params) } };
         }
 
         public async Task<IWidget> CreateWidget(WidgetSetting data)

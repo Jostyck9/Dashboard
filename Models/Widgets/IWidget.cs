@@ -8,6 +8,7 @@ namespace Dashboard.Models.Widgets
     public interface IWidget
     {
         public WidgetsId GetType();
+        public int GetId();
     }
 
     public enum WidgetsId

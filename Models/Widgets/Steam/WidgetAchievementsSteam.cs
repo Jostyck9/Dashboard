@@ -9,6 +9,12 @@ namespace Dashboard.Models.Widgets.Steam
     public class WidgetAchievementsSteam : IWidget
     {
         public AchievementList Data { get; set; }
+        public int IdWidget { get; set; }
+
+        public int GetId()
+        {
+            return IdWidget;
+        }
 
         WidgetsId IWidget.GetType()
         {
