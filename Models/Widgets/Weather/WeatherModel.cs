@@ -24,7 +24,7 @@ namespace Dashboard.Models.Weather
                     var stringResult = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<WeatherData>(stringResult);
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new WeatherData();
                 }
@@ -44,7 +44,7 @@ namespace Dashboard.Models.Weather
                     var stringResult = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<WeatherData>(stringResult);
                 }
-                catch (HttpRequestException _)
+                catch (HttpRequestException)
                 {
                     return new WeatherData();
                 }

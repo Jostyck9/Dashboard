@@ -176,5 +176,18 @@ namespace Dashboard.Controllers
             }
             return true;
         }
+
+        [HttpPost, Authorize]
+        public bool DeleteWidget(int id)
+        {
+            if (id <= 0)
+                return false;
+            var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (currentUser != null)
+            {
+                _widgetsSettings.DeleteWidgetsById(currentUser, id);
+            }
+            return true;
+        }
     }
 }

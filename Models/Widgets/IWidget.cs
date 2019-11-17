@@ -13,6 +13,7 @@ namespace Dashboard.Models.Widgets
         * @return a widget Id
         */
         public WidgetsId GetType();
+        public int GetId();
     }
 
     public enum WidgetsId

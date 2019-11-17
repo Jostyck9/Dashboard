@@ -30,27 +30,28 @@ namespace Dashboard.Controllers
         {
             _widgetsSettings = new Dal(db);
             _logger = logger;
-
-            /**
-             * 
-             * Test for the db and the configured widgets
-             * 
-             */
-            /*_widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.STEAM_PLAYERS, "440");
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.STEAM_PLAYERS, "1085660");
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.WEATHER, "Nantes");
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.YOUTUBE_CHANNEL_SUB, "UCYGjxo5ifuhnmvhPvCc3DJQ");
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.YOUTUBE_VIDEO, "wZZ7oFKsKzY");
-            _widgetsSettings.AddWidget("56a72f73-eb1e-4874-9efd-20b73f129626", WidgetsId.YOUTUBE_VIDEO, "KaqC5FnvAEc");
-
-            _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.STEAM_NEWS, "440;2");
-            _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.STEAM_PLAYERS, "440");
-            _widgetsSettings.AddWidget("319001e4-041f-44ae-a412-e452e6133eb3", WidgetsId.WEATHER, "Paris");*/
         }
 
         ~HomeController()
         {
             _widgetsSettings.Dispose();
+        }
+
+        [HttpGet, Authorize]
+        public async Task<IActionResult> Widgets()
+        {
+            List<IWidget> res = null;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (currentUser != null)
+                {
+                    var userDatas = _widgetsSettings.GetWidgetsByUsr(currentUser);
+                    res = await _factory.CreateListWidget(userDatas);
+                }
+            }
+            return View("_columns", res);
         }
 
         /**

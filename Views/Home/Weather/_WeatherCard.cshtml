@@ -2,9 +2,8 @@
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@if (Model.Name != "")
+@if (Model != null && Model.Name != "")
 {
-    <div class="card text-center shadow rounded">
         <h5 class="card-title">@Model.Name</h5>
         <div class="card-body">
             @foreach (var weather in Model.Weather)
@@ -13,5 +12,4 @@
             }
             <p class="card-text">@Model.Main.Temp °C</p>
         </div>
-    </div>
 }

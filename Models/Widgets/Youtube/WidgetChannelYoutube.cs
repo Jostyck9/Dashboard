@@ -9,6 +9,13 @@ namespace Dashboard.Models.Widgets.Youtube
     public class WidgetChannelYoutube : IWidget
     {
         public ChannelYoutube Data { get; set; }
+        public int IdWidget { get; set; }
+
+        public int GetId()
+        {
+            return IdWidget;
+        }
+
         WidgetsId IWidget.GetType()
         {
             return WidgetsId.YOUTUBE_CHANNEL_SUB;

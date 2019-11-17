@@ -3,9 +3,8 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@if (Model.AppNews != null)
+@if (Model != null && Model.AppNews != null)
 {
-    <div class="card text-center shadow rounded">
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 @foreach (var news in Model.AppNews.NewsItems)
@@ -27,5 +26,4 @@
                 }
             </ul>
         </div>
-    </div>
 }

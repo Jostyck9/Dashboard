@@ -127,3 +127,32 @@ $(function () {
         return false;
     });
 });
+
+
+$(document).ready(function () {
+    $("#deleteWidgethzbaduyzd").click(function () {
+        var id = $(this).attr('idWidget');
+        $.ajax({
+            type: "POST",
+            url: "Edit/DeleteWidget",
+            data: "id=" + id,
+            success: function (result) {
+            }
+        });
+        return false;
+    });
+});
+
+function deleteWidget(id) {
+    $.ajax({
+        type: "POST",
+        url: "Edit/DeleteWidget",
+        data: "id=" + id,
+        success: function (result) {
+            $.get('/home/Widgets', function (result) {
+                $('#refreshColumn').html(result);
+            });
+        }
+    });
+    return false;
+}
