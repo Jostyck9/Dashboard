@@ -1,0 +1,25 @@
+﻿@model Dashboard.Models.Widgets.IWidget
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@if (Model != null && Model.GetId() != 0)
+{
+    <div class="card text-center shadow rounded">
+        @if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_VIDEO)
+            @await Html.PartialAsync("Youtube/_VideoCard", (Model as Dashboard.Models.Widgets.Youtube.WidgetVideoYoutube).Data)
+        else if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_CHANNEL_SUB)
+            @await Html.PartialAsync("Youtube/_ChannelCard", (Model as Dashboard.Models.Widgets.Youtube.WidgetChannelYoutube).Data)
+        else if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.WEATHER)
+            @await Html.PartialAsync("Weather/_WeatherCard", (Model as Dashboard.Models.Widgets.Weather.WidgetWeather).Data)
+        else if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_ACHIEVEMENTS)
+            @await Html.PartialAsync("Steam/_AchievementsCard", (Model as Dashboard.Models.Widgets.Steam.WidgetAchievementsSteam).Data)
+        else if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_NEWS)
+            @await Html.PartialAsync("Steam/_NewsCard", (Model as Dashboard.Models.Widgets.Steam.WidgetNewsSteam).Data)
+        else if (Model.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_PLAYERS)
+            @await Html.PartialAsync("Steam/_PlayersGameCard", (Model as Dashboard.Models.Widgets.Steam.WidgetPlayersGameSteam).Data)
+        <div class="card-footer">
+            <button onclick="deleteWidget(@Model.GetId())" type="submit" class="btn btn-danger" id="deleteWidget" idWidget=@Model.GetId()>Delete</button>
+        </div>
+    </div>
+}

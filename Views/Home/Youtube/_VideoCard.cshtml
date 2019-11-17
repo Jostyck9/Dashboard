@@ -1,35 +1,29 @@
-﻿@*model Dashboard.Models.youtube.VideoYoutube*@
-@model Dashboard.Models.Widgets.IWidget
+﻿@model Dashboard.Models.youtube.VideoYoutube
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{Dashboard.Models.Widgets.Youtube.WidgetVideoYoutube yt = (Model as Dashboard.Models.Widgets.Youtube.WidgetVideoYoutube);
-    if (yt.Data.VideoUrl != "")
+    @if (Model.VideoUrl != "")
         {
             <div class="card text-center shadow rounded">
                 <div class="card embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src=@yt.Data.VideoUrl allowfullscreen=""></iframe>
+                    <iframe class="embed-responsive-item" src=@Model.VideoUrl allowfullscreen=""></iframe>
                 </div>
-                <h5 class="card-title">@yt.Data.Title</h5>
+                <h5 class="card-title">@Model.Title</h5>
                 <div class="card-body">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <p class="card-text">@yt.Data.Likes</p>
+                            <p class="card-text">@Model.Likes</p>
                             <p class="card-text"><small class="text-muted">Likes</small></p>
                         </div>
                         <div class="col-md-4">
-                            <p class="card-text">@yt.Data.ViewCount</p>
+                            <p class="card-text">@Model.ViewCount</p>
                             <p class="card-text"><small class="text-muted">Views</small></p>
                         </div>
                         <div class="col-md-4">
-                            <p class="card-text">@yt.Data.Dislikes</p>
+                            <p class="card-text">@Model.Dislikes</p>
                             <p class="card-text"><small class="text-muted">Dislikes</small></p>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-danger" id="deleteWidget" idWidget=@yt.GetId()>Delete</button>
-                </div>
             </div>
         }
-}

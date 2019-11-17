@@ -8,33 +8,10 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    @if (Model != null && Model.Count() != 0)
-    {
-    <div class="card-columns">
-        @foreach (var widget in Model)
-        {
-            if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_VIDEO)
-                            @await Html.PartialAsync("Youtube/_VideoCard", widget)
-            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_CHANNEL_SUB)
-                            @await Html.PartialAsync("Youtube/_ChannelCard", (widget as Dashboard.Models.Widgets.Youtube.WidgetChannelYoutube).Data)
-            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.WEATHER)
-                            @await Html.PartialAsync("Weather/_WeatherCard", (widget as Dashboard.Models.Widgets.Weather.WidgetWeather).Data)
-            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_ACHIEVEMENTS)
-                            @await Html.PartialAsync("Steam/_AchievementsCard", (widget as Dashboard.Models.Widgets.Steam.WidgetAchievementsSteam).Data)
-            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_NEWS)
-                            @await Html.PartialAsync("Steam/_NewsCard", (widget as Dashboard.Models.Widgets.Steam.WidgetNewsSteam).Data)
-            else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.STEAM_PLAYERS)
-                            @await Html.PartialAsync("Steam/_PlayersGameCard", (widget as Dashboard.Models.Widgets.Steam.WidgetPlayersGameSteam).Data)
-        }
+
+    <div id="refreshColumn">
+        @await Html.PartialAsync("_columns", Model)
     </div>
-    }
-    else
-    {
-        <div class="text-center">
-            <h1>No widgets configure</h1>
-            <a href="/Edit" class="btn btn-lg btn-secondary">Edit</a>
-        </div>
-    }
     @*<div class="card-columns" id="refreshme">
         await Html.PartialAsync("_Data", Model)
     </div>
