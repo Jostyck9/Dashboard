@@ -8,7 +8,7 @@ namespace Dashboard.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-	public DbSet<Models.WidgetsSettings.Data.WidgetSetting> WidgetsSettings { get; set; }
+	    public DbSet<Models.WidgetsSettings.Data.WidgetSetting> WidgetsSettings { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
