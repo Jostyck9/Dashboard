@@ -127,3 +127,18 @@ $(function () {
         return false;
     });
 });
+
+
+$(document).ready(function () {
+    $("#deleteWidget").click(function () {
+        var id = $(this).attr('idWidget');
+        $.ajax({
+            type: "POST",
+            url: "Edit/DeleteWidget",
+            data: "id=" + id,
+            success: function (result) {
+            }
+        });
+        return false;
+    });
+});

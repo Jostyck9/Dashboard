@@ -14,7 +14,7 @@
         @foreach (var widget in Model)
         {
             if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_VIDEO)
-                            @await Html.PartialAsync("Youtube/_VideoCard", (widget as Dashboard.Models.Widgets.Youtube.WidgetVideoYoutube).Data)
+                            @await Html.PartialAsync("Youtube/_VideoCard", widget)
             else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.YOUTUBE_CHANNEL_SUB)
                             @await Html.PartialAsync("Youtube/_ChannelCard", (widget as Dashboard.Models.Widgets.Youtube.WidgetChannelYoutube).Data)
             else if (widget.GetType() == Dashboard.Models.Widgets.WidgetsId.WEATHER)
