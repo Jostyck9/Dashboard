@@ -10,6 +10,12 @@ namespace Dashboard.Models.Widgets.Youtube
     {
         public ChannelYoutube Data { get; set; }
         public int IdWidget { get; set; }
+        public ulong Delay { get; set; }
+
+        public ulong GetDelay()
+        {
+            return Delay;
+        }
 
         public int GetId()
         {

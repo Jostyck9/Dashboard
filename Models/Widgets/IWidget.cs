@@ -14,6 +14,7 @@ namespace Dashboard.Models.Widgets
         */
         public WidgetsId GetType();
         public int GetId();
+        public ulong GetDelay();
     }
 
     public enum WidgetsId

@@ -9,7 +9,13 @@ namespace Dashboard.Models.Widgets.Steam
     public class WidgetNewsSteam : IWidget
     {
         public AppNewsData Data { get; set; }
+        public ulong Delay { get; set; }
         public int IdWidget { get; set; }
+
+        public ulong GetDelay()
+        {
+            return Delay;
+        }
 
         public int GetId()
         {
