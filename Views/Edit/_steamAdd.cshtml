@@ -5,10 +5,11 @@
 <div class="modal-body">
     <form action="" method="POST">
         <div class="form-group">
+            <br />
             <label for="appId">App's Id</label>
             <input class="form-control" id="appId" aria-describedby="appId" placeholder="Enter a appId">
             <label class="alert-danger" for="appId" id="error_appId">The appId needs to be valid</label>
-
+            <br />
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="radiosSteam" id="CurrentPlayersRadio" value="players" checked>
                 <label class="form-check-label" for="CurrentPlayersRadio">
@@ -27,6 +28,9 @@
                     Global achievements of a game
                 </label>
             </div>
+            <br />
+            <label for="refreshSteam">refresh delay</label>
+            <input class="form-control" type="number" id="refreshSteam" aria-describedby="refreshSteam" placeholder="20 sec" min="0" max="10000" step="1">
 
         </div>
 

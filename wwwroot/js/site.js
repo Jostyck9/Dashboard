@@ -9,25 +9,24 @@ $(function () {
     $("button#video_submit").click(function () {
         $(".alert-success").hide();
         $('.alert-danger').hide();
+        var delay = $("input#refreshVideo").val();
+        if (delay == "")
+            delay = "20";
         var url = $("input#urlVideo").val();
         if (url == "") {
             $(".alert-danger").show();
             $("input#urlVideo").focus();
             return false;
         }
-        $.ajax({
-            type: "POST",
-            url: "Edit/AddVideoYoutube",
-            data: "url=" + url,
-            success: function (result) {
+        $.post("Edit/AddVideoYoutube", { url: url, delay: delay },
+            function (result) {
                 if (result == false) {
                     $('div#error_video').show("fast");
                 } else {
                     $('div#succes_video').show("fast");
                     $("button.close").click();
                 }
-            }
-        });
+            });
         return false;
     });
 });
@@ -38,25 +37,24 @@ $(function () {
     $("button#channel_submit").click(function () {
         $(".alert-success").hide();
         $('.alert-danger').hide();
+        var delay = $("input#refreshChannel").val();
+        if (delay == "")
+            delay = "20";
         var url = $("input#idChannel").val();
         if (url == "") {
             $(".alert-danger").show();
             $("input#idChannel").focus();
             return false;
         }
-        $.ajax({
-            type: "POST",
-            url: "Edit/AddChannelYoutube",
-            data: "id=" + url,
-            success: function (result) {
+        $.post("Edit/AddChannelYoutube", { id: url, delay: delay },
+            function (result) {
                 if (result == false) {
                     $('div#error_channel').show("fast");
                 } else {
                     $('div#succes_channel').show("fast");
                     $("button.close").click();
                 }
-            }
-        });
+            });
         return false;
     });
 });
@@ -67,25 +65,24 @@ $(function () {
     $("button#weather_submit").click(function () {
         $(".alert-success").hide();
         $('.alert-danger').hide();
+        var delay = $("input#refreshWeather").val();
+        if (delay == "")
+            delay = "20";
         var location = $("input#location").val();
         if (location == "") {
             $(".alert-danger").show();
             $("input#location").focus();
             return false;
         }
-        $.ajax({
-            type: "POST",
-            url: "Edit/AddWeather",
-            data: "location=" + location,
-            success: function (result) {
+        $.post('Edit/AddWeather', { location: location, delay: delay },
+            function (result) {
                 if (result == false) {
                     $('div#error_weather').show("fast");
                 } else {
                     $('div#succes_weather').show("fast");
                     $("button.close").click();
                 }
-            }
-        });
+            });
         return false;
     });
 });
@@ -96,6 +93,9 @@ $(function () {
     $("button#steam_submit").click(function () {
         $(".alert-success").hide();
         $('.alert-danger').hide();
+        var delay = $("input#refreshSteam").val();
+        if (delay == "")
+            delay = "20";
         var appId = $("input#appId").val();
         if (appId == "") {
             $(".alert-danger").show();
@@ -111,19 +111,15 @@ $(function () {
         } else if (type == "achievements") {
             urlRedirection += "AddAchievementSteam";
         }
-        $.ajax({
-            type: "POST",
-            url: urlRedirection,
-            data: "appId=" + appId,
-            success: function (result) {
+        $.post(urlRedirection, { appId: appId, delay: delay },
+            function (result) {
                 if (result == false) {
                     $('div#error_steam').show("fast");
                 } else {
                     $('div#succes_steam').show("fast");
                     $("button.close").click();
                 }
-            }
-        });
+            });
         return false;
     });
 });

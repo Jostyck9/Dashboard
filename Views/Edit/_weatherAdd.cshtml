@@ -5,9 +5,13 @@
     <div class="modal-body">
         <form action="" method="POST">
             <div class="form-group">
+                <br />
                 <label for="location">Weather's location</label>
                 <input class="form-control" id="location" aria-describedby="location" placeholder="Enter a valid location">
                 <label class="alert-danger" for="location" id="error_location">The location needs to be valid</label>
+                <br />
+                <label for="refreshWeather">refresh delay</label>
+                <input class="form-control" type="number" id="refreshWeather" aria-describedby="refreshWeather" placeholder="20 sec" min="0" max="10000" step="1">
             </div>
 
         </form>

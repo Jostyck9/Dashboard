@@ -14,5 +14,7 @@ namespace Dashboard.Models.WidgetsSettings.Data
         public WidgetsId WidgetId { get; set; }
         [Required]
         public string Params { get; set; }
+
+        public ulong TimerDelay { get; set; }
     }
 }

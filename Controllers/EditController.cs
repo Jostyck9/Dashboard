@@ -51,7 +51,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddChannelYoutube(string id)
+        public async Task<bool> AddChannelYoutube(string id, ulong delay = 20)
         {
              ChannelYoutube res = await _ytModel.GetChannelById(id);
 
@@ -62,7 +62,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.YOUTUBE_CHANNEL_SUB, res.Id);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.YOUTUBE_CHANNEL_SUB, res.Id, delay);
             }
             return true;
         }
@@ -73,7 +73,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddVideoYoutube(string url)
+        public async Task<bool> AddVideoYoutube(string url, ulong delay = 20)
         {
             VideoYoutube res = await _ytModel.GetVideoByUrl(url);
 
@@ -84,7 +84,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.YOUTUBE_VIDEO, res.VideoId);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.YOUTUBE_VIDEO, res.VideoId, delay);
             }
             return true;
         }
@@ -95,7 +95,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddWeather(string location)
+        public async Task<bool> AddWeather(string location, ulong delay = 20)
         {
             WeatherData res = await _wModel.GetWeatherByLocation(location);
 
@@ -106,7 +106,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.WEATHER, res.Name);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.WEATHER, res.Name, delay = 20);
             }
             return true;
         }
@@ -117,7 +117,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddNewsSteam(string appId)
+        public async Task<bool> AddNewsSteam(string appId, ulong delay = 20)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
 
@@ -128,7 +128,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_NEWS, appId);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_NEWS, appId, delay = 20);
             }
             return true;
         }
@@ -139,7 +139,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddPlayersSteam(string appId)
+        public async Task<bool> AddPlayersSteam(string appId, ulong delay = 20)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
 
@@ -150,7 +150,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_PLAYERS, appId);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_PLAYERS, appId, delay);
             }
             return true;
         }
@@ -161,7 +161,7 @@ namespace Dashboard.Controllers
         * 
         * @return a bool
         */
-        public async Task<bool> AddAchievementSteam(string appId)
+        public async Task<bool> AddAchievementSteam(string appId, ulong delay = 20)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
 
@@ -172,7 +172,7 @@ namespace Dashboard.Controllers
             var currentUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (currentUser != null)
             {
-                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_ACHIEVEMENTS, appId);
+                _widgetsSettings.AddWidget(currentUser, WidgetsId.STEAM_ACHIEVEMENTS, appId, delay);
             }
             return true;
         }

@@ -30,9 +30,9 @@ namespace Dashboard.Models.WidgetsSettings
 
         }
 
-        public void AddWidget(string userId, WidgetsId widgetId, string parameters)
+        public void AddWidget(string userId, WidgetsId widgetId, string parameters, ulong delaySec = 20)
         {
-            _db.WidgetsSettings.Add(new WidgetSetting { UserId = userId, WidgetId = widgetId, Params = parameters });
+            _db.WidgetsSettings.Add(new WidgetSetting { UserId = userId, WidgetId = widgetId, Params = parameters, TimerDelay = 20 });
             _db.SaveChanges();
         }
 

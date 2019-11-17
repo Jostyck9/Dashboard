@@ -19,7 +19,7 @@ namespace Dashboard.Models.WidgetsSettings
         /**
         * @brief add a widget to a user with parameters
         */
-        public void AddWidget(string userId, WidgetsId widgetId, string parameters);
+        public void AddWidget(string userId, WidgetsId widgetId, string parameters, ulong delaySec = 20);
         /**
         * @brief get all widgets from an user
         *

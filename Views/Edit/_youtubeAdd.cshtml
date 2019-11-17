@@ -20,9 +20,13 @@
 
             <form action="" method="POST">
                 <div class="form-group">
+                    <br>
                     <label for="idChannel">Channel to add</label>
                     <input class="form-control" id="idChannel" aria-describedby="idChannel" placeholder="Enter a valid id">
                     <label class="alert-danger" for="idChannel" id="error_idChannel">The id needs to be valid</label>
+                    <br>
+                    <label for="refreshChannel">refresh delay</label>
+                    <input class="form-control" type="number" id="refreshChannel" aria-describedby="refreshChannel" placeholder="0 sec" min="0" max="10000" step="1">
                 </div>
 
 
@@ -55,9 +59,13 @@
 
             <form action="" method="POST">
                 <div class="form-group">
+                    <br />
                     <label for="urlVideo">Video to add</label>
                     <input type="url" class="form-control" id="urlVideo" aria-describedby="urlVideo" placeholder="Enter a valid url">
                     <label class="alert-danger" for="urlVideo" id="error_urlVideo">The url needs to be valid</label>
+                    <br />
+                    <label for="refreshVideo">refresh delay</label>
+                    <input class="form-control" type="number" id="refreshVideo" aria-describedby="refreshVideo" placeholder="20 sec" min="0" max="10000" step="1">
                 </div>
 
 
