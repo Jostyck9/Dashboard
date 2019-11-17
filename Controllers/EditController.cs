@@ -21,6 +21,10 @@ namespace Dashboard.Controllers
         private readonly IWeatherModel _wModel;
         private readonly ISteamModel _sModel;
 
+        /**
+        * @brief assign all Model to local variables in controller
+        * 
+        */
         public EditController(ApplicationDbContext db)
         {
             _widgetsSettings = new Dal(db);
@@ -30,12 +34,23 @@ namespace Dashboard.Controllers
         }
 
         [HttpGet, Route("Edit")]
+        
+        /**
+        * @brief get the view of the EditController
+        * 
+        * @return a View
+        */
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief Add a youtube channel from his id from a string
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddChannelYoutube(string id)
         {
              ChannelYoutube res = await _ytModel.GetChannelById(id);
@@ -53,6 +68,11 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief Add a youtube video from his url from a string
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddVideoYoutube(string url)
         {
             VideoYoutube res = await _ytModel.GetVideoByUrl(url);
@@ -70,6 +90,11 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief add the weather widget from his location from a string
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddWeather(string location)
         {
             WeatherData res = await _wModel.GetWeatherByLocation(location);
@@ -87,6 +112,11 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief add a Steam widget from his application Id from a string which display News from the game
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddNewsSteam(string appId)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
@@ -104,6 +134,11 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief add a Steam widget from his application id from a string which display number of players
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddPlayersSteam(string appId)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);
@@ -121,6 +156,11 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost, Authorize]
+        /**
+        * @brief add a Steam widget from his application id from a string which display the achivement of the game
+        * 
+        * @return a bool
+        */
         public async Task<bool> AddAchievementSteam(string appId)
         {
             ResponseData res = await _sModel.GetCurrentPlayersGame(appId);

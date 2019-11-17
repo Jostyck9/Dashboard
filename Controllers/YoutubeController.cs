@@ -11,12 +11,22 @@ namespace Dashboard.Controllers
     {
         private IYoutubeModel youtubeModel = new YoutubeModel();
 
+        /**
+        * @brief Search for a youtube video from string
+        * 
+        * @return a View
+        */
         public async Task<IActionResult> Index(string query = "Pokemon")
         {
             return View(await youtubeModel.SearchVideos(query));
         }
 
         [HttpGet("[controller]/[action]/{query?}")]
+        /**
+        * @brief Search for a youtube channel from string
+        * 
+        * @return a View
+        */
         public async Task<IActionResult> Channels(string query = "")
         {
             var res = await youtubeModel.SearchChannels(query);

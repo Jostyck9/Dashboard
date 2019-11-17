@@ -15,6 +15,11 @@ namespace Dashboard.Models.youtube
         const string BASE_URL = "https://www.youtube.com/embed/";
         private static readonly string[] validAuthorities = { "youtube.com", "www.youtube.com", "youtu.be", "www.youtu.be" };
 
+        /**
+        * @brief check if the string in paramater is a correct URL
+        *
+        * @return a bool
+        */
         private bool ValidUrl(string url)
         {
             try
@@ -30,6 +35,11 @@ namespace Dashboard.Models.youtube
             return true;
         }
 
+        /**
+        * @brief get the id of a video from an URL which is a string
+        *
+        * @return a string
+        */
         public string GetIdVideo(string url)
         {
             if (url == null || !ValidUrl(url))
@@ -43,6 +53,11 @@ namespace Dashboard.Models.youtube
             return null;
         }
 
+        /**
+        * @brief get all the informations of a video from an Id which is a string
+        *
+        * @return a structure of Video Youtube
+        */
         public async Task<VideoYoutube> GetVideoById(string id)
         {
             VideoYoutube toReturn = new VideoYoutube { Dislikes = 0, Likes = 0, Title = "", VideoUrl = "", VideoId = "",  ViewCount = 0 };
@@ -84,6 +99,11 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
+        /**
+        * @brief get all the informations of a video from an URL which is a string
+        *
+        * @return a structure of Video Youtube
+        */
         public async Task<VideoYoutube> GetVideoByUrl(string url)
         {
             VideoYoutube toReturn = new VideoYoutube { Dislikes = 0, Likes = 0, Title = "", VideoUrl = "", ViewCount = 0 };
@@ -96,6 +116,11 @@ namespace Dashboard.Models.youtube
             return await GetVideoById(id);
         }
 
+        /**
+        * @brief get all videos from a research
+        *
+        * @return a list structure of Video Youtube
+        */
         public async Task<List<VideoYoutube>> SearchVideos(string query, int maxRes = 50)
         {
             var toReturn = new List<VideoYoutube>();
@@ -126,6 +151,11 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
+        /**
+        * @brief get all channels from a research
+        *
+        * @return a list structure of Video Youtube
+        */
         public async Task<List<ChannelYoutube>> SearchChannels(string query, int maxRes = 20)
         {
             var toReturn = new List<ChannelYoutube>();
@@ -156,6 +186,11 @@ namespace Dashboard.Models.youtube
             return toReturn;
         }
 
+        /**
+        * @brief get all the informations of a channel from an Id which is a string
+        *
+        * @return a structure of Video Youtube
+        */
         public async Task<ChannelYoutube> GetChannelById(string id)
         {
             ChannelYoutube toReturn = new ChannelYoutube {Id = "", SubCount = 0, Title = ""};

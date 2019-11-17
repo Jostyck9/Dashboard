@@ -8,6 +8,11 @@ namespace Dashboard.Models.About.Services
 {
     public class SteamService : IService
     {
+        /**
+        * @brief get the achivements of a game 
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetAchievementWidget()
         {
             WidgetData res = new WidgetData
@@ -26,6 +31,11 @@ namespace Dashboard.Models.About.Services
             return res;
         }
 
+        /**
+        * @brief get the current number of player of a game
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetPlayersWidget()
         {
             WidgetData res = new WidgetData
@@ -43,7 +53,11 @@ namespace Dashboard.Models.About.Services
             };
             return res;
         }
-
+        /**
+        * @brief get the news of a game 
+        *
+        * @return a Widget Data class
+        */
         public WidgetData GetNewsWidget()
         {
             WidgetData res = new WidgetData
@@ -62,6 +76,11 @@ namespace Dashboard.Models.About.Services
             return res;
         }
 
+        /**
+        * @brief get all the services of steam
+        *
+        * @return a Service Data class
+        */
         public ServiceData GetService()
         {
             ServiceData res = new ServiceData
